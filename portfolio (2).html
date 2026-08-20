@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SK Mahmmed Yaseen — Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:#1c2333;
+    --paper:#efe9da;
+    --paper-line:#dcd3bc;
+    --amber:#c9812f;
+    --teal:#3f8f83;
+    --paper-soft:#f6f2e7;
+    --muted:#6b6455;
+    --white:#fdfcf8;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  /* ruled notebook background on paper sections */
+  .ruled{
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 38px,
+      var(--paper-line) 39px
+    );
+  }
+
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px;}
+
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  /* ===== NAV ===== */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(239,233,218,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--paper-line);
+  }
+  nav .wrap{display:flex;justify-content:space-between;align-items:center;height:64px;}
+  .brand{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;}
+  .brand span{color:var(--amber);}
+  .navlinks{display:flex;gap:28px;font-size:14px;font-family:'JetBrains Mono',monospace;}
+  .navlinks a{opacity:0.75;transition:opacity .2s;}
+  .navlinks a:hover{opacity:1;color:var(--amber);}
+
+  /* ===== HERO ===== */
+  .hero{
+    background:var(--ink);
+    color:var(--paper-soft);
+    padding:90px 0 80px;
+    position:relative;
+  }
+  .hero .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--amber);
+    margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--teal);display:inline-block;animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+
+  .hero h1{
+    font-size:clamp(2.3rem,4.2vw,3.4rem);
+    line-height:1.08;
+    margin-bottom:20px;
+  }
+  .hero h1 em{font-style:italic;color:var(--amber);}
+  .hero p.lead{
+    font-size:17px;
+    color:#c7c2b3;
+    max-width:44ch;
+    margin-bottom:30px;
+  }
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13.5px;
+    padding:12px 22px;
+    border-radius:3px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:transform .18s ease, background .18s ease;
+    border:1px solid transparent;
+  }
+  .btn-primary{background:var(--amber);color:var(--ink);font-weight:700;}
+  .btn-primary:hover{transform:translateY(-2px);background:#dd9744;}
+  .btn-ghost{border-color:#4b5468;color:var(--paper-soft);}
+  .btn-ghost:hover{border-color:var(--amber);color:var(--amber);}
+
+  /* terminal */
+  .terminal{
+    background:#141826;
+    border-radius:8px;
+    border:1px solid #2b3148;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
+    overflow:hidden;
+  }
+  .term-bar{
+    background:#1b2032;
+    padding:10px 14px;
+    display:flex;
+    gap:7px;
+    align-items:center;
+    border-bottom:1px solid #2b3148;
+  }
+  .term-dot{width:10px;height:10px;border-radius:50%;}
+  .term-body{
+    padding:22px 20px 26px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:13.5px;
+    color:#c9d1e0;
+    min-height:230px;
+  }
+  .term-line{margin-bottom:6px;white-space:pre-wrap;}
+  .term-prompt{color:var(--teal);}
+  .term-caret{
+    display:inline-block;width:8px;height:15px;background:var(--amber);
+    animation:blink 1s step-end infinite;vertical-align:text-bottom;margin-left:2px;
+  }
+  @keyframes blink{50%{opacity:0;}}
+  .term-out{color:#e9e4d4;}
+  .term-comment{color:#5c6580;}
+
+  /* ===== SECTION HEADERS ===== */
+  .section{padding:86px 0;}
+  .section-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    color:var(--amber);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .section-tag::before{content:"// ";color:var(--muted);}
+  .section h2{font-size:clamp(1.7rem,3vw,2.3rem);margin-bottom:8px;}
+  .section-sub{color:var(--muted);max-width:60ch;margin-bottom:44px;font-size:15.5px;}
+
+  /* ===== ABOUT ===== */
+  .about-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:56px;align-items:start;}
+  .about-card{
+    background:var(--white);
+    border:1px solid var(--paper-line);
+    border-radius:6px;
+    padding:28px;
+  }
+  .about-card .label{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;}
+  .about-card .val{font-size:15.5px;margin-bottom:18px;font-weight:500;}
+  .about-card .val:last-child{margin-bottom:0;}
+  .about-text p{margin-bottom:16px;color:#3a3628;font-size:16px;}
+  .about-text strong{color:var(--ink);}
+
+  /* ===== SKILLS ===== */
+  .skills-list{display:flex;flex-direction:column;gap:22px;}
+  .skill-row{}
+  .skill-top{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:13.5px;margin-bottom:8px;}
+  .skill-top .pct{color:var(--muted);}
+  .skill-track{height:8px;background:var(--paper-line);border-radius:4px;overflow:hidden;}
+  .skill-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--teal),var(--amber));width:0;transition:width 1.4s cubic-bezier(.2,.8,.2,1);}
+
+  .tools-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+    gap:12px;margin-top:40px;
+  }
+  .tool-chip{
+    background:var(--white);
+    border:1px solid var(--paper-line);
+    border-radius:5px;
+    padding:14px 16px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+  }
+  .tool-chip .t-name{font-weight:700;display:block;margin-bottom:2px;}
+  .tool-chip .t-desc{color:var(--muted);font-size:11.5px;}
+
+  /* ===== TIMELINE (learning log) ===== */
+  .log{position:relative;padding-left:28px;}
+  .log::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:var(--paper-line);}
+  .log-item{position:relative;padding-bottom:34px;}
+  .log-item:last-child{padding-bottom:0;}
+  .log-item::before{
+    content:"";position:absolute;left:-28px;top:4px;width:11px;height:11px;border-radius:50%;
+    background:var(--paper);border:2px solid var(--teal);
+  }
+  .log-item.active::before{background:var(--amber);border-color:var(--amber);}
+  .log-tag{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--amber);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+  .log-item h3{font-size:18px;margin-bottom:6px;}
+  .log-item p{color:var(--muted);font-size:14.5px;max-width:58ch;}
+
+  /* ===== PROJECTS ===== */
+  .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;}
+  .proj-card{
+    background:var(--white);
+    border:1px solid var(--paper-line);
+    border-radius:7px;
+    padding:24px;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .proj-card:hover{transform:translateY(-4px);box-shadow:0 18px 30px -18px rgba(28,35,51,0.25);}
+  .proj-num{font-family:'JetBrains Mono',monospace;color:var(--paper-line);font-size:26px;font-weight:700;margin-bottom:10px;}
+  .proj-card h3{font-size:17px;margin-bottom:8px;}
+  .proj-card p{color:var(--muted);font-size:14px;margin-bottom:14px;}
+  .proj-stack{display:flex;gap:6px;flex-wrap:wrap;}
+  .stack-pill{font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--paper);border:1px solid var(--paper-line);padding:3px 9px;border-radius:20px;color:var(--muted);}
+  .proj-status{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal);margin-top:14px;display:inline-block;}
+
+  /* ===== CONTACT / FOOTER ===== */
+  .contact{background:var(--ink);color:var(--paper-soft);padding:90px 0 40px;}
+  .contact .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;}
+  .contact h2{color:var(--white);}
+  .contact-sub{color:#a9a493;max-width:46ch;margin-bottom:34px;font-size:15.5px;}
+  .contact-links{display:flex;flex-direction:column;gap:14px;}
+  .clink{
+    display:flex;align-items:center;gap:12px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:14.5px;
+    padding:14px 16px;
+    border:1px solid #333c54;
+    border-radius:6px;
+    transition:border-color .2s, background .2s;
+  }
+  .clink:hover{border-color:var(--amber);background:#1c2233;}
+  .clink .k{color:var(--muted);width:60px;flex-shrink:0;}
+  .foot-note{
+    margin-top:60px;padding-top:24px;border-top:1px solid #2b3148;
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:#6b7290;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  }
+
+  @media (max-width:760px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .about-grid{grid-template-columns:1fr;}
+    .contact .wrap{grid-template-columns:1fr;}
+    .navlinks{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">yaseen<span>.dev</span></div>
+    <div class="navlinks">
+      <a href="#about">about</a>
+      <a href="#skills">skills</a>
+      <a href="#log">log</a>
+      <a href="#projects">projects</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Compiling a career in tech</div>
+      <h1>SK Mahmmed Yaseen —<br>building my <em>first year</em><br>into a foundation.</h1>
+      <p class="lead">First-year tech student learning Java from the ground up — turning fundamentals into working programs, one build at a time.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">See what I'm building →</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="term-bar">
+        <div class="term-dot" style="background:#ff5f57;"></div>
+        <div class="term-dot" style="background:#febc2e;"></div>
+        <div class="term-dot" style="background:#28c840;"></div>
+      </div>
+      <div class="term-body" id="termBody"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section ruled" id="about">
+  <div class="wrap">
+    <div class="section-tag">whoami</div>
+    <h2>About</h2>
+    <div class="section-sub"></div>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="label">Name</div>
+        <div class="val">SK Mahmmed Yaseen</div>
+        <div class="label">Status</div>
+        <div class="val">1st Year, Tech Student</div>
+        <div class="label">Currently learning</div>
+        <div class="val">Java — core fundamentals</div>
+        <div class="label">Focus</div>
+        <div class="val">Programming logic &amp; problem solving</div>
+      </div>
+      <div class="about-text">
+        <p>I'm in my <strong>first year of college</strong>, studying to build a career in tech. Right now that means going deep on the fundamentals rather than skipping ahead — I want the basics to be solid before I stack anything on top of them.</p>
+        <p><strong>Java is where I started.</strong> I've been learning core concepts — variables, control flow, OOP basics, and how a program actually runs — and I'm working through small programs to turn theory into something I can actually build.</p>
+        <p>This portfolio isn't a finished showcase — it's a running log of a first-year student learning in public. Expect it to grow as I do.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="skills" style="background:var(--paper-soft);">
+  <div class="wrap">
+    <div class="section-tag">skill_check.java</div>
+    <h2>Skills</h2>
+    <div class="section-sub">An honest snapshot of where I am right now — not where I'll end up.</div>
+
+    <div class="skills-list">
+      <div class="skill-row">
+        <div class="skill-top"><span>Java — Core Syntax &amp; Fundamentals</span><span class="pct">Confident</span></div>
+        <div class="skill-track"><div class="skill-fill" data-fill="70%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-top"><span>Object-Oriented Programming (Basics)</span><span class="pct">Learning</span></div>
+        <div class="skill-track"><div class="skill-fill" data-fill="45%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-top"><span>Problem Solving &amp; Logic Building</span><span class="pct">Practicing</span></div>
+        <div class="skill-track"><div class="skill-fill" data-fill="55%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-top"><span>Data Structures</span><span class="pct">Just started</span></div>
+        <div class="skill-track"><div class="skill-fill" data-fill="20%"></div></div>
+      </div>
+    </div>
+
+    <div class="tools-grid">
+      <div class="tool-chip"><span class="t-name">Java</span><span class="t-desc">core language</span></div>
+      <div class="tool-chip"><span class="t-name">VS Code</span><span class="t-desc">editor</span></div>
+      <div class="tool-chip"><span class="t-name">Git</span><span class="t-desc">learning basics</span></div>
+      <div class="tool-chip"><span class="t-name">DSA</span><span class="t-desc">starting out</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section ruled" id="log">
+  <div class="wrap">
+    <div class="section-tag">git log --student</div>
+    <h2>Learning Log</h2>
+    <div class="section-sub">The path so far, and where it's headed next.</div>
+
+    <div class="log">
+      <div class="log-item">
+        <div class="log-tag">Semester 1</div>
+        <h3>Started college as a tech student</h3>
+        <p>Began first-year coursework and got my first real exposure to programming concepts.</p>
+      </div>
+      <div class="log-item active">
+        <div class="log-tag">In progress</div>
+        <h3>Learning Java fundamentals</h3>
+        <p>Working through core syntax, control flow, and object-oriented basics — writing small programs to practice each concept.</p>
+      </div>
+      <div class="log-item">
+        <div class="log-tag">Next</div>
+        <h3>Data structures &amp; first real projects</h3>
+        <p>Planning to move from exercises into small self-directed projects, and start exploring data structures.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="projects" style="background:var(--paper-soft);">
+  <div class="wrap">
+    <div class="section-tag">./projects</div>
+    <h2>Projects</h2>
+    <div class="section-sub">Early-stage builds from learning Java — practical, not polished yet.</div>
+
+    <div class="proj-grid">
+      <div class="proj-card">
+        <div class="proj-num">01</div>
+        <h3>Console-Based Calculator</h3>
+        <p>A Java program that performs basic arithmetic operations through a command-line interface — built to practice control flow and input handling.</p>
+        <div class="proj-stack"><span class="stack-pill">Java</span><span class="stack-pill">CLI</span></div>
+        <span class="proj-status">● in progress</span>
+      </div>
+      <div class="proj-card">
+        <div class="proj-num">02</div>
+        <h3>Student Records System</h3>
+        <p>A simple OOP-based program to store and manage student details, built to practice classes, objects, and basic data handling.</p>
+        <div class="proj-stack"><span class="stack-pill">Java</span><span class="stack-pill">OOP</span></div>
+        <span class="proj-status">● planned</span>
+      </div>
+      <div class="proj-card">
+        <div class="proj-num">03</div>
+        <h3>Number &amp; Pattern Programs</h3>
+        <p>A set of small Java programs — pattern printing, number logic, and loops — used to strengthen core programming fundamentals.</p>
+        <div class="proj-stack"><span class="stack-pill">Java</span><span class="stack-pill">Logic</span></div>
+        <span class="proj-status">● ongoing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div>
+      <div class="section-tag">connect()</div>
+      <h2>Let's talk</h2>
+      <p class="contact-sub">Open to internships, collaborations, or just connecting with other people learning to code. Reach out — I'll get back to you.</p>
+    </div>
+    <div class="contact-links">
+      <a class="clink" href="mailto:mahmmedyaseensk@gmail.com"><span class="k">email</span> mahmmedyaseensk@gmail.com</a>
+      <a class="clink" href="https://github.com/mahmmedyaseen" target="_blank" rel="noopener"><span class="k">github</span> github.com/mahmmedyaseen</a>
+      <a class="clink" href="https://www.linkedin.com/in/mahmmed-yaseen-shaik-3b9aaa387" target="_blank" rel="noopener"><span class="k">linkedin</span> linkedin.com/in/mahmmed-yaseen-shaik-3b9aaa387</a>
+    </div>
+  </div>
+  <div class="wrap foot-note">
+    <span>© 2026 SK Mahmmed Yaseen</span>
+    <span>Built while learning — updated as I grow.</span>
+  </div>
+</section>
+
+<script>
+  // Terminal typing sequence
+  const lines = [
+    { type: 'cmd', text: 'javac Yaseen.java' },
+    { type: 'out', text: 'Compiling... done ✔' },
+    { type: 'cmd', text: 'java Yaseen' },
+    { type: 'out', text: 'Hi, I\\'m Yaseen — 1st year tech student.' },
+    { type: 'out', text: 'Currently learning: Java fundamentals.' },
+    { type: 'comment', text: '// still compiling my future, one line at a time' }
+  ];
+
+  const termBody = document.getElementById('termBody');
+  let lineIndex = 0;
+
+  function typeLine() {
+    if (lineIndex >= lines.length) {
+      const caretLine = document.createElement('div');
+      caretLine.className = 'term-line';
+      caretLine.innerHTML = '<span class="term-prompt">yaseen@dev:~$</span> <span class="term-caret"></span>';
+      termBody.appendChild(caretLine);
+      return;
+    }
+    const item = lines[lineIndex];
+    const div = document.createElement('div');
+    div.className = 'term-line';
+    termBody.appendChild(div);
+
+    if (item.type === 'cmd') {
+      let i = 0;
+      const prefix = '<span class="term-prompt">yaseen@dev:~$</span> ';
+      const typer = setInterval(() => {
+        div.innerHTML = prefix + item.text.slice(0, i) + '<span class="term-caret"></span>';
+        i++;
+        if (i > item.text.length) {
+          clearInterval(typer);
+          div.innerHTML = prefix + item.text;
+          lineIndex++;
+          setTimeout(typeLine, 260);
+        }
+      }, 32);
+    } else {
+      div.innerHTML = item.type === 'comment'
+        ? '<span class="term-comment">' + item.text + '</span>'
+        : '<span class="term-out">' + item.text + '</span>';
+      lineIndex++;
+      setTimeout(typeLine, 380);
+    }
+  }
+  typeLine();
+
+  // Skill bar reveal on scroll
+  const fills = document.querySelectorAll('.skill-fill');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.width = entry.target.dataset.fill;
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  fills.forEach(f => observer.observe(f));
+</script>
+
+</body>
+</html>
