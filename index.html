@@ -206,6 +206,35 @@
   .log-item h3{font-size:18px;margin-bottom:6px;}
   .log-item p{color:var(--muted);font-size:14.5px;max-width:58ch;}
 
+  /* ===== CERTIFICATIONS ===== */
+  .cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+  .cert-card{
+    background:var(--white);
+    border:1px solid var(--paper-line);
+    border-radius:7px;
+    padding:22px 24px;
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .cert-card:hover{transform:translateY(-4px);box-shadow:0 18px 30px -18px rgba(28,35,51,0.25);}
+  .cert-badge{
+    flex-shrink:0;
+    width:40px;height:40px;
+    border-radius:8px;
+    background:var(--paper);
+    border:1px solid var(--paper-line);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;
+    font-weight:700;
+    color:var(--teal);
+    font-size:15px;
+  }
+  .cert-body h3{font-size:15.5px;margin-bottom:4px;line-height:1.35;}
+  .cert-meta{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:6px;}
+  .cert-id{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--paper-line);}
+
   /* ===== PROJECTS ===== */
   .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;}
   .proj-card{
@@ -263,6 +292,7 @@
       <a href="#about">about</a>
       <a href="#skills">skills</a>
       <a href="#log">log</a>
+      <a href="#certifications">certs</a>
       <a href="#projects">projects</a>
       <a href="#contact">contact</a>
     </div>
@@ -372,6 +402,25 @@
         <div class="log-tag">Next</div>
         <h3>Data structures &amp; first real projects</h3>
         <p>Planning to move from exercises into small self-directed projects, and start exploring data structures.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section ruled" id="certifications">
+  <div class="wrap">
+    <div class="section-tag">./certifications</div>
+    <h2>Certifications</h2>
+    <div class="section-sub">Courses completed outside the classroom.</div>
+
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-badge">LF</div>
+        <div class="cert-body">
+          <h3>Introduction to RISC-V (LFD110)</h3>
+          <div class="cert-meta">The Linux Foundation · September 2026</div>
+          <div class="cert-id">ID: LF-35eiy8thc3</div>
+        </div>
       </div>
     </div>
   </div>
